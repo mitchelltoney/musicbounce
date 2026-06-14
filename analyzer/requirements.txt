@@ -1,0 +1,25 @@
+# Synesthete analyzer — Python dependencies.
+# Verified working on macOS arm64 (Apple Silicon) / Python 3.10 with MPS.
+# Engine: beat_this + Demucs + librosa (see analyzer/README.md for why not allin1).
+# These are the versions that ACTUALLY resolved on this machine — not guesses.
+# Exact transitive pins are captured in requirements.lock.txt.
+
+# --- acceleration core (MPS) ---
+torch==2.12.0
+torchaudio==2.11.0
+
+# --- analyzer engine ---
+beat-this==1.1.0        # SOTA beats + downbeats (transformer)
+demucs==4.0.1           # htdemucs source separation -> per-stem onsets
+librosa==0.11.0         # energy / spectral / chroma / key / segmentation
+soundfile==0.14.0
+numpy==2.2.6
+scipy==1.15.3
+
+# --- service ---
+fastapi==0.136.3
+uvicorn[standard]==0.49.0
+python-multipart==0.0.32
+
+# --- tests ---
+pytest==9.1.0

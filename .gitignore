@@ -1,0 +1,40 @@
+# --- Python ---
+.venv/
+.venv-allin1/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# --- Node / Vite ---
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# --- Model weights & caches (multi-GB — never commit) ---
+.cache/
+*.pt
+*.th
+*.onnx
+*.ckpt
+
+# --- Analyzer Score cache (regenerable, keyed by sourceHash) ---
+analyzer/.score_cache/
+
+# --- Generated synthetic fixtures (regenerable by the generator) ---
+fixtures/*.wav
+
+# --- Real test audio (user-supplied, do not commit) ---
+fixtures/real/*
+!fixtures/real/.gitkeep
+
+# --- Generated screenshots ---
+test/screenshots/*.png
+test/screenshots/*.jpg
+
+# --- OS / editor ---
+.DS_Store
+*.log
+.idea/
+.vscode/

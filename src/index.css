@@ -1,0 +1,97 @@
+:root {
+  color-scheme: dark;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; height: 100%; width: 100%; background: #000; overflow: hidden; }
+
+.app { position: fixed; inset: 0; }
+.stage { display: block; width: 100vw; height: 100vh; }
+
+.hud {
+  position: fixed; top: 12px; left: 12px;
+  display: flex; gap: 8px; align-items: center;
+  pointer-events: none; user-select: none;
+}
+.badge {
+  font-size: 12px; letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px; padding: 4px 8px; backdrop-filter: blur(6px);
+}
+.badge-err {
+  color: #ff9a9a; border-color: rgba(255, 90, 90, 0.4);
+  max-width: 46ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.overlay {
+  position: fixed; top: 12px; right: 12px;
+  border-radius: 8px; pointer-events: none; opacity: 0.95;
+}
+
+.tuning {
+  position: fixed; top: 46px; left: 12px; width: 256px; z-index: 10;
+}
+
+.transport {
+  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px;
+}
+.btn {
+  font: inherit; font-size: 13px; color: #eee; cursor: pointer;
+  background: rgba(20, 20, 28, 0.7); border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px; padding: 8px 14px; backdrop-filter: blur(8px);
+}
+.btn:disabled { opacity: 0.4; cursor: default; }
+.btn:hover:not(:disabled) { border-color: rgba(255, 255, 255, 0.4); }
+
+.drop-hint {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  color: rgba(255, 255, 255, 0.35); font-size: 14px; letter-spacing: 0.08em;
+  pointer-events: none;
+}
+
+/* --- mode switch --- */
+.mode-toggle {
+  position: fixed; bottom: 14px; right: 14px; z-index: 50;
+  font: inherit; font-size: 12px; color: #cfd6e6; cursor: pointer;
+  background: rgba(20, 20, 28, 0.7); border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px; padding: 6px 12px; backdrop-filter: blur(8px);
+}
+.mode-toggle:hover { border-color: rgba(255, 255, 255, 0.4); }
+
+/* --- choreograph: recording indicators --- */
+.badge-rec { color: #ff7a7a; border-color: rgba(255, 80, 80, 0.5); animation: recpulse 1s infinite; }
+@keyframes recpulse { 50% { opacity: 0.45; } }
+.btn-rec-on { color: #fff; background: rgba(200, 40, 40, 0.7); border-color: rgba(255, 120, 120, 0.7); }
+
+/* --- choreograph: track panel --- */
+.track-panel {
+  position: fixed; top: 48px; left: 12px; width: 384px; max-height: 60vh; overflow-y: auto;
+  background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px;
+  padding: 8px; backdrop-filter: blur(8px); font-size: 12px;
+}
+.track-panel-head { color: rgba(255, 255, 255, 0.6); padding: 2px 4px 6px; letter-spacing: 0.06em; }
+.track-row { display: flex; align-items: center; gap: 6px; padding: 5px 4px; border-radius: 6px; cursor: pointer; }
+.track-row:hover { background: rgba(255, 255, 255, 0.05); }
+.track-active { background: rgba(120, 150, 255, 0.16); box-shadow: inset 0 0 0 1px rgba(140, 170, 255, 0.4); }
+.track-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+.track-name { width: 90px; background: transparent; border: none; color: #e7ebf5; font: inherit; }
+.track-name:focus { outline: 1px solid rgba(255, 255, 255, 0.2); border-radius: 3px; }
+.track-style { background: rgba(20, 22, 30, 0.9); color: #cdd4e4; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 5px; font: inherit; font-size: 11px; }
+.track-hue { width: 60px; }
+.track-count { width: 26px; text-align: right; color: rgba(255, 255, 255, 0.55); }
+.track-btn { background: none; border: none; cursor: pointer; font-size: 13px; opacity: 0.7; padding: 0 1px; }
+.track-btn:hover { opacity: 1; }
+.track-add { margin-top: 6px; width: 100%; }
+
+/* --- choreograph: phrase ruler --- */
+.ruler-wrap { position: fixed; bottom: 62px; left: 5vw; width: 90vw; }
+.ruler { position: relative; height: 40px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px; cursor: pointer; overflow: hidden; }
+.phrase { position: absolute; top: 0; height: 100%; border-right: 1px solid rgba(255, 255, 255, 0.1); }
+.phrase:hover { background: rgba(255, 255, 255, 0.07); }
+.phrase-label { position: absolute; top: 2px; left: 3px; font-size: 9px; color: rgba(255, 255, 255, 0.35); pointer-events: none; }
+.tap-tick { position: absolute; top: 14px; height: 26px; width: 2px; opacity: 0.9; pointer-events: none; }
+.playhead { position: absolute; top: 0; height: 100%; width: 2px; background: #fff; box-shadow: 0 0 6px #fff; pointer-events: none; }
+.ruler-hint { color: rgba(255, 255, 255, 0.35); font-size: 11px; margin-top: 4px; text-align: center; }
